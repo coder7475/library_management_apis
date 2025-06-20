@@ -12,3 +12,7 @@ export interface IBook extends Document {
 	createdAt?: Date;
 	updatedAt?: Date;
 }
+
+export interface BookMethods extends Document {
+	updateAvailability(): Promise<IBook>;
+}

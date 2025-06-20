@@ -37,8 +37,10 @@ const createBorrow = async (
 				data: book,
 			});
 		} else {
+			// Deduct the requested quantity from the book’s copies
 			book.copies -= quantity;
-
+			// use instance method make available to false for copies 0
+			book.updateAvailability();
 		}
 
 		// use instance method to create borrow
@@ -50,6 +52,7 @@ const createBorrow = async (
 			message: "Book borrowed successfully",
 			data: borrow,
 		});
+		
 	} catch (error) {
 		res.status(500).json({
 			message: "Failed to borrow book",
