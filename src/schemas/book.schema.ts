@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+// create book schema
 export const bookZodSchema = z.object({
   title: z.string(),
   author: z.string(),
@@ -10,9 +11,9 @@ export const bookZodSchema = z.object({
   available: z.boolean().optional(),
 });
 
-// Schema to validate user update (partial fields allowed)
+// book update schema (partial fields allowed)
 export const updateBookSchema = bookZodSchema.partial();
 
-// Zod inferred types for use in TypeScript
-export type CreateUserInput = z.infer<typeof bookZodSchema>;
-export type UpdateUserInput = z.infer<typeof updateBookSchema>;
+// validators
+export type CreateBookValidator = z.infer<typeof bookZodSchema>;
+export type UpdateBookValidator = z.infer<typeof updateBookSchema>;
