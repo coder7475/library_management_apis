@@ -1,6 +1,6 @@
 import express from "express";
 import indexRouter from "@/routes";
-import userRoute from "@/routes/users.routes";
+import userRoute from "@/routes/books.route";
 import { middlewares } from "@/middlewares";
 import helmet from "helmet";
 import cors from "cors";
@@ -17,7 +17,8 @@ app.use(helmet()); // add security http headers: csp
 
 // routes
 app.use("/", indexRouter);
-app.use("/users", userRoute);
+app.use("/books", userRoute);
+app.use("/borrow", )
 
 // not found routes
 app.use(middlewares.notFoundRoute);
