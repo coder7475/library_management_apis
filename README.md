@@ -89,7 +89,7 @@ MONGODB_URI="mongodb://127.0.0.1:27017/your_db_name"
 pnpm run dev
 ```
 
-### 4️⃣ Format & Lint (Optional)
+### 4️⃣ Format & Lint
 
 ```bash
 pnpm format && pnpm lint

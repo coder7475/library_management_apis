@@ -1,6 +1,5 @@
 import express from "express";
 import indexRouter from "@/routes";
-import userRoute from "@/routes/books.route";
 import { middlewares } from "@/middlewares";
 import helmet from "helmet";
 import cors from "cors";

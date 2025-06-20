@@ -1,14 +1,14 @@
 import { Book } from "@/models/book.model";
-import { BookQueryParams, CreateBookValidator } from "@/schemas/book.schema";
+import type { BookQueryParams, CreateBookValidator } from "@/schemas/book.schema";
 import type { Request, Response } from "express";
 
 const getBooks = async (req: Request<{}, {}, {}, BookQueryParams>, res: Response): Promise<void> => {
 	try {
 		const { filter, sortBy = "createdAt", sort = "asc", limit = 10 } = req.query;
 		const sortOrder = sort === "desc" ? -1 : 1;
-		
+
 		const books = await Book.find(filter ? { genre: filter } : {})
-			.sort({ [sortBy]: sortOrder})
+			.sort({ [sortBy]: sortOrder })
 			.limit(limit);
 
 		res.status(200).json({
