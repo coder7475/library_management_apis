@@ -5,5 +5,5 @@ import { validate } from "./validate";
 export const middlewares = {
 	notFoundRoute,
 	globalErrorHandler,
-	validate
+	validate,
 };

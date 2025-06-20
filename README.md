@@ -1,57 +1,101 @@
-# Express + TypeScript + Docker Template
+# 📚 Library Management API – Express + TypeScript
 
-A starter template for building modern backend applications with **Express.js**, **TypeScript**, **Docker**, and **pnpm**. Perfect for local development and production-ready deployments.
+A backend system for managing a digital library, built with **Express.js**, **TypeScript**, and **MongoDB**. It supports book cataloging, borrowing workflows, and strict data validation using Mongoose and Zod.
 
 ---
 
 ## 🚀 Features
 
-- ⚡️ Express.js with TypeScript
-- 📦 pnpm as package manager
-- 🐳 Docker support for dev & prod
-- 📂 Modular folder structure
-- 🌱 `.env` environment configuration
-- 🔁 Hot-reloading with `ts-node-dev`
+- ✅ RESTful API for managing books and borrowing
+- 📦 Modular project structure using TypeScript
+- 🌿 Environment configuration using `.env`
+- 🔐 Robust validation using Zod + Mongoose
+- 📊 MongoDB Aggregation for borrow summary
+- 🧠 Static & Instance Methods for business logic
+- ⛔ Mongoose Middleware (`pre`, `post`) support
+- 🔍 Filter & Sort query parameters
 
 ---
 
-## 🧱 Project Structure
+## 📁 Project Structure
 
 ```
-
 .
-├── src/
-│ ├── routes/
-│ │ └── index.ts # Sample route
-│ ├── app.ts # Express app config
-│ └── server.ts # Entry point
-├── .env # Environment variables
-├── Dockerfile # Production Docker build
-├── docker-compose.yml # Dev environment
-├── package.json # Project metadata
-├── tsconfig.json # TS config for dev
-├── tsconfig.build.json # TS config for prod build
-└── README.md # You're here!
-
+├── README.md
+├── biome.json               # BiomeJS config for linting & formatting
+├── package.json             # Project metadata
+├── pnpm-lock.yaml           # Lockfile
+├── tsconfig.json            # TS config for dev
+├── tsconfig.build.json      # TS config for prod build
+└── src
+    ├── app.ts               # Express app config
+    ├── server.ts            # Entry point
+    ├── configs/             # Env & DB setup
+    ├── controller/          # Business logic
+    ├── interfaces/          # TypeScript interfaces
+    ├── middlewares/         # Error handler, Zod validation
+    ├── models/              # Mongoose models (Book, Borrow)
+    ├── routes/              # Express route definitions
+    └── schemas/             # Zod validation schemas
 ```
 
 ---
 
-## 🛠️ Development Setup
+## 🎨 API Design
 
-1. **Install dependencies**
+### 📘 Book Endpoints
+
+| Method | Endpoint             | Description                          |
+|--------|----------------------|--------------------------------------|
+| POST   | `/api/books`         | Add a new book                       |
+| GET    | `/api/books`         | List all books (with filter & sort)  |
+| GET    | `/api/books/:id`     | Get a single book by ID              |
+| PUT    | `/api/books/:id`     | Update book fields (e.g., copies)    |
+| DELETE | `/api/books/:id`     | Delete a book                        |
+
+### 📖 Borrow Endpoints
+
+| Method | Endpoint      | Description                                                                |
+|--------|---------------|----------------------------------------------------------------------------|
+| POST   | `/api/borrow` | Borrow a book (checks quantity, updates copies, handles availability flag) |
+| GET    | `/api/borrow` | Aggregated borrow summary by book (`title`, `isbn`, `totalQuantity`)       |
+
+---
+
+## 🛠️ Getting Started
+
+### 1️⃣ Clone & Install
 
 ```bash
+git clone https://github.com/coder7475/library_management_apis.git
+cd library_management_apis
 pnpm install
 ```
 
-2. **Run locally**
+### 2️⃣ Environment Setup
+
+Create a `.env` file in the root directory:
+
+```
+PORT=5000
+HOST=localhost
+NODE_ENV=development
+MONGODB_URI="mongodb://127.0.0.1:27017/your_db_name"
+```
+
+### 3️⃣ Run in Development
 
 ```bash
 pnpm run dev
 ```
 
-3. **Lint and type-check (optional)**
+### 4️⃣ Format & Lint (Optional)
+
+```bash
+pnpm format && pnpm lint
+```
+
+### 5️⃣ Build for Production
 
 ```bash
 pnpm run build
@@ -59,35 +103,33 @@ pnpm run build
 
 ---
 
-## 🐳 Docker Usage
+## 🔎 API Query Parameters
 
-### Run in Development Mode
+For `/api/books`:
 
-```bash
-docker-compose up --build
-```
-
-### Build for Production
-
-```bash
-docker build -t express-ts-app .
-```
-
-### Run in Production
-
-```bash
-docker run -p 3000:3000 --env-file .env express-ts-app
-```
+| Query Param | Description                       |
+|-------------|-----------------------------------|
+| `filter`    | Filter books by genre             |
+| `sortBy`    | Field to sort by (e.g., `title`)  |
+| `sort`      | Sort order: `asc` or `desc`       |
+| `limit`     | Limit number of books returned    |
 
 ---
 
-## 🌐 Access the App
+## 📈 Data Model
 
-After running in any mode, open:
+![Data Model](./data_model.png)
 
-```
-http://localhost:3000
-```
+
+---
+
+## ⚙️ Business Logic
+
+- ✅ Prevent borrow if available copies < requested quantity
+- ➖ Deduct `quantity` from book’s `copies`
+- ❌ If `copies` becomes 0, set `available` to `false`
+- 📈 Borrow summary via MongoDB aggregation
+- 🧠 Logic implemented using static & instance methods
 
 ---
 
@@ -95,11 +137,13 @@ http://localhost:3000
 
 - [Express](https://expressjs.com/)
 - [TypeScript](https://www.typescriptlang.org/)
+- [MongoDB + Mongoose](https://mongoosejs.com/)
+- [Zod](https://zod.dev/)
 - [pnpm](https://pnpm.io/)
-- [Docker](https://www.docker.com/)
+- [Biome](https://biomejs.dev/)
 
 ---
 
 ## 📄 License
 
-MIT – feel free to use and modify.
+Licensed under the [MIT License](LICENSE). Free to use and modify.
