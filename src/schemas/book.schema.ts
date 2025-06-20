@@ -17,3 +17,14 @@ export const updateBookSchema = bookZodSchema.partial();
 // validators
 export type CreateBookValidator = z.infer<typeof bookZodSchema>;
 export type UpdateBookValidator = z.infer<typeof updateBookSchema>;
+
+
+// book query schema
+export const bookQuerySchema = z.object({
+	filter: z.enum(["FICTION", "NON_FICTION", "SCIENCE", "HISTORY", "BIOGRAPHY", "FANTASY"]).optional(),
+	sortBy: z.string().optional(),
+	sort: z.enum(["asc", "desc"]).optional(),
+	limit: z.coerce.number().optional()
+});
+
+export type BookQueryParams = z.infer<typeof bookQuerySchema>;
