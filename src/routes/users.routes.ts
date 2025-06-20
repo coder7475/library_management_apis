@@ -1,12 +1,11 @@
+import { userController } from "@/controller/user.controller";
+import { middlewares } from "@/middlewares";
+import { createUserSchema } from "@/schemas/user.schema";
 import { Router } from "express";
 
 const userRoute = Router();
 
-userRoute.get("/", (_req, res) => {
-	res.json({
-		status: 200,
-		message: "This is users route",
-	});
-});
+userRoute.post("/", middlewares.validate(createUserSchema), userController.createUser);
+userRoute.get("/", userController.getUsers);
 
 export default userRoute;
