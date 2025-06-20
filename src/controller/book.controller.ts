@@ -6,11 +6,16 @@ const getBooks = async (req: Request<{}, {}, {}, BookQueryParams>, res: Response
 	try {
 		const { filter, sortBy = "createdAt", sort = "asc", limit = 10 } = req.query;
 
+		// query might have filter property
 		const query: Partial<Pick<BookQueryParams, "filter">> = {};
+		// if filter exits add the filter
 		if (filter) query.filter = filter;
 
-		const books = await Book.find(filter ? { genre: filter } : {})
-			.sort({ [sortBy]: sort === "desc" ? -1 : 1 })
+		const sortOrder = sort === "desc" ? -1 : 1;
+
+		// retrive the books according to query
+		const books = await Book.find(query)
+			.sort({ [sortBy]: sortOrder })
 			.limit(limit);
 
 		res.status(200).json({
