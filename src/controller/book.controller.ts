@@ -1,36 +1,41 @@
+import { Book } from "@/models/book.model";
+import { CreateBookValidator } from "@/schemas/book.schema";
 import type { Request, Response } from "express";
-import { User } from "@/models/book.model";
-import type { CreateUserInput } from "@/schemas/book.schema";
 
-const getUsers = async (_req: Request, res: Response): Promise<void> => {
-	const allUsers = await User.find();
+const getBooks = async (_req: Request, res: Response): Promise<void> => {
+	const allBooks = await Book.find();
 	res.json({
 		status: 200,
 		message: "Fetched Successfully",
-		data: allUsers,
+		data: allBooks
 	});
 };
 
-const createUser = async (req: Request<Record<string, never>, Record<string, never>, CreateUserInput>, res: Response): Promise<void> => {
+const createBook = async (req: Request<Record<string, never>, Record<string, never>, CreateBookValidator>, res: Response): Promise<void> => {
 	try {
-		const user = new User(req.body);
-		await user.save();
+		// use instance method to save
+		const book = new Book(req.body);
+		await book.save();
 
 		res.status(201).json({
-			status: 201,
-			message: "User created successfully",
-			data: user,
+			success: true,
+			message: "Book created successfully",
+			data: book,
 		});
-	} catch (error) {
+
+	}
+	catch (error) {
+
 		res.status(500).json({
-			status: 500,
-			message: "Failed to create user",
+			message: "Failed to create book",
+			sucess: false,
 			error: (error as Error).message,
 		});
+
 	}
 };
 
 export const userController = {
-	getUsers,
-	createUser,
+	getBooks,
+	createBook,
 };
