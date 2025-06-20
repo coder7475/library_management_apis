@@ -29,5 +29,3 @@ export const bookQuerySchema = z.object({
 });
 
 export type BookQueryParams = z.infer<typeof bookQuerySchema>;
-
-

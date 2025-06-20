@@ -1,5 +1,5 @@
 import { Book } from "@/models/book.model";
-import type { BookQueryParams, CreateBookValidator } from "@/schemas/book.schema";
+import type { BookQueryParams, CreateBookValidator, UpdateBookValidator } from "@/schemas/book.schema";
 import type { Request, Response } from "express";
 
 const getBooks = async (req: Request<unknown, unknown, unknown, BookQueryParams>, res: Response): Promise<void> => {
@@ -76,8 +76,38 @@ const createBook = async (
 	}
 };
 
+const updateBook = async (req: Request<{ bookId: string }, unknown, UpdateBookValidator>, res: Response) => {
+	try {
+		const { bookId } = req.params;
+		const updates = req.body;
+
+		const book = await Book.findByIdAndUpdate(bookId, updates, { new: true });
+
+		if (!book) {
+			res.status(404).json({
+				message: "Book Not Found",
+				sucess: false,
+				data: book,
+			});
+		}
+
+		res.status(200).json({
+			success: true,
+			message: "Book updated successfully",
+			data: book,
+		});
+	} catch (error) {
+		res.status(500).json({
+			message: "Failed to update book",
+			sucess: false,
+			error: (error as Error).message,
+		});
+	}
+};
+
 export const bookController = {
 	getBooks,
 	createBook,
-	getBookById
+	getBookById,
+	updateBook,
 };
