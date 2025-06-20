@@ -25,6 +25,34 @@ const getBooks = async (req: Request<unknown, unknown, unknown, BookQueryParams>
 	}
 };
 
+const getBookById = async (req: Request<{ bookId: string }>, res: Response) => {
+	try {
+		const { bookId } = req.params;
+
+		const book = await Book.findById(bookId);
+
+		if (!book) {
+			res.status(404).json({
+				message: "Book Not Found",
+				sucess: false,
+				data: book,
+			});
+		} else {
+			res.status(200).json({
+				success: true,
+				message: "Book retrieved successfully",
+				data: book,
+			});
+		}
+	} catch (error) {
+		res.status(500).json({
+			message: "Failed to retrieve book",
+			sucess: false,
+			error: (error as Error).message,
+		});
+	}
+};
+
 const createBook = async (
 	req: Request<Record<string, never>, Record<string, never>, CreateBookValidator>,
 	res: Response,
@@ -51,4 +79,5 @@ const createBook = async (
 export const bookController = {
 	getBooks,
 	createBook,
+	getBookById
 };

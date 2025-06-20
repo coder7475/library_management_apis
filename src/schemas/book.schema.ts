@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+// for post books route
 // create book schema
 export const bookZodSchema = z.object({
 	title: z.string(),
@@ -18,6 +19,7 @@ export const updateBookSchema = bookZodSchema.partial();
 export type CreateBookValidator = z.infer<typeof bookZodSchema>;
 export type UpdateBookValidator = z.infer<typeof updateBookSchema>;
 
+// for get books route
 // book query schema
 export const bookQuerySchema = z.object({
 	filter: z.enum(["FICTION", "NON_FICTION", "SCIENCE", "HISTORY", "BIOGRAPHY", "FANTASY"]).optional(),
@@ -27,3 +29,5 @@ export const bookQuerySchema = z.object({
 });
 
 export type BookQueryParams = z.infer<typeof bookQuerySchema>;
+
+

@@ -12,4 +12,3 @@ export interface IBook extends Document {
 	createdAt?: Date;
 	updatedAt?: Date;
 }
-

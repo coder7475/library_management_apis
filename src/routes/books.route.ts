@@ -7,5 +7,6 @@ const bookRouter = Router();
 
 bookRouter.post("/", middlewares.validate(bookZodSchema), bookController.createBook);
 bookRouter.get("/", middlewares.validate(bookQuerySchema), bookController.getBooks);
+bookRouter.get("/:bookId", bookController.getBookById);
 
 export default bookRouter;
