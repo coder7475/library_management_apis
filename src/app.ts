@@ -17,7 +17,7 @@ app.use(helmet()); // add security http headers: csp
 
 // routes
 app.use("/", indexRouter);
-app.use("/books", bookRouter);
+app.use("/api/books", bookRouter);
 // app.use("/borrow",)
 
 // not found routes

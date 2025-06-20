@@ -108,7 +108,6 @@ const updateBook = async (req: Request<{ bookId: string }, unknown, UpdateBookVa
 const deleteBook = async (req: Request<{ bookId: string }>, res: Response) => {
 	try {
 		const { bookId } = req.params;
-		
 
 		const book = await Book.findByIdAndDelete(bookId);
 
@@ -139,5 +138,5 @@ export const bookController = {
 	createBook,
 	getBookById,
 	updateBook,
-	deleteBook
+	deleteBook,
 };
