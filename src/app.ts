@@ -4,6 +4,7 @@ import userRoute from "@/routes/books.route";
 import { middlewares } from "@/middlewares";
 import helmet from "helmet";
 import cors from "cors";
+import bookRouter from "@/routes/books.route";
 
 // Initialize the express app
 const app = express();
@@ -17,8 +18,8 @@ app.use(helmet()); // add security http headers: csp
 
 // routes
 app.use("/", indexRouter);
-app.use("/books", userRoute);
-app.use("/borrow", )
+app.use("/books", bookRouter);
+// app.use("/borrow",)
 
 // not found routes
 app.use(middlewares.notFoundRoute);

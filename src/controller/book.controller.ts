@@ -35,7 +35,7 @@ const createBook = async (req: Request<Record<string, never>, Record<string, nev
 	}
 };
 
-export const userController = {
+export const bookController = {
 	getBooks,
 	createBook,
 };
