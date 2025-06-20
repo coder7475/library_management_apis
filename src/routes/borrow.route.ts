@@ -1,8 +1,11 @@
 import { borrowController } from "@/controller/borrow.controller";
+import { validate } from "@/middlewares/validate";
+import { borrowZodSchema } from "@/schemas/borrow.schema";
 import { Router } from "express";
 
 const borrowRouter = Router();
 
 borrowRouter.get("/", borrowController.getAllBorrows);
+borrowRouter.post("/", validate(borrowZodSchema));
 
 export default borrowRouter;
