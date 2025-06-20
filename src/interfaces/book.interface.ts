@@ -13,9 +13,3 @@ export interface IBook extends Document {
 	updatedAt?: Date;
 }
 
-export interface BookQueryParams {
-	filter?: "FICTION" | "NON_FICTION" | "SCIENCE" | "HISTORY" | "BIOGRAPHY" | "FANTASY"; // genre filter
-	sortBy?: string; // field to sort by, e.g., 'createdAt'
-	sort?: "asc" | "desc"; // sort direction
-	limit?: number; // number of results
-}
