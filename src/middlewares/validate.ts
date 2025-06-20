@@ -2,7 +2,7 @@ import type { ZodSchema } from "zod";
 import type { Request, Response, NextFunction } from "express";
 
 export const validate =
-	(schema: ZodSchema<any>, source: "body" | "params" | "query" = "body") =>
+	(schema: ZodSchema<unknown>, source: "body" | "params" | "query" = "body") =>
 	(req: Request, res: Response, next: NextFunction) => {
 		const result = schema.safeParse(req[source]);
 

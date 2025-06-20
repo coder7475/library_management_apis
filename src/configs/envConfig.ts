@@ -20,7 +20,7 @@ const envSchema = z.object({
 		.string()
 		.default("3000")
 		.transform(Number)
-		.refine((val) => !isNaN(val), {
+		.refine((val) => !Number.isNaN(val), {
 			message: "PORT must be a valid number",
 		}),
 	HOST: z.string().default("localhost"),

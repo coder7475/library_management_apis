@@ -11,7 +11,7 @@ const getUsers = async (_req: Request, res: Response): Promise<void> => {
 	});
 };
 
-const createUser = async (req: Request<{}, {}, CreateUserInput>, res: Response): Promise<void> => {
+const createUser = async (req: Request<Record<string, never>, Record<string, never>, CreateUserInput>, res: Response): Promise<void> => {
 	try {
 		const user = new User(req.body);
 		await user.save();
