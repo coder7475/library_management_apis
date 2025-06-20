@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { User } from "@/models/users.model";
+import { User } from "@/models/book.model";
 import type { CreateUserInput } from "@/schemas/book.schema";
 
 const getUsers = async (_req: Request, res: Response): Promise<void> => {

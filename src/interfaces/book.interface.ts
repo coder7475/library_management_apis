@@ -6,7 +6,7 @@ export interface IBook extends Document {
 	author: string;
 	genre: 'FICTION' | 'NON_FICTION' | 'SCIENCE' | 'HISTORY' | 'BIOGRAPHY' | 'FANTASY';
 	isbn: string;
-	descriptio?: string;
+	description?: string;
 	copies: number;
 	available: boolean;
 	createdAt?: Date;

@@ -1,5 +1,5 @@
-import { User } from "./users.model";
+import { Book } from "./book.model";
 
 export const mongoModels = {
-	User,
+	Book,
 };
