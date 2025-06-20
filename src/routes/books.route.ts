@@ -9,5 +9,6 @@ bookRouter.post("/", middlewares.validate(bookZodSchema), bookController.createB
 bookRouter.get("/", middlewares.validate(bookQuerySchema), bookController.getBooks);
 bookRouter.get("/:bookId", bookController.getBookById);
 bookRouter.put("/:bookId", middlewares.validate(updateBookSchema), bookController.updateBook);
+bookRouter.delete("/:bookId", bookController.deleteBook);
 
 export default bookRouter;

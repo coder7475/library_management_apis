@@ -105,9 +105,39 @@ const updateBook = async (req: Request<{ bookId: string }, unknown, UpdateBookVa
 	}
 };
 
+const deleteBook = async (req: Request<{ bookId: string }>, res: Response) => {
+	try {
+		const { bookId } = req.params;
+		
+
+		const book = await Book.findByIdAndDelete(bookId);
+
+		if (!book) {
+			res.status(404).json({
+				message: "Book Not Found",
+				sucess: false,
+				data: book,
+			});
+		}
+
+		res.status(200).json({
+			success: true,
+			message: "Book deleted successfully",
+			data: book,
+		});
+	} catch (error) {
+		res.status(500).json({
+			message: "Failed to delete book",
+			sucess: false,
+			error: (error as Error).message,
+		});
+	}
+};
+
 export const bookController = {
 	getBooks,
 	createBook,
 	getBookById,
 	updateBook,
+	deleteBook
 };
