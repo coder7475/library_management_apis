@@ -1,9 +1,9 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const borrowZodSchema = z.object({
-  bookId: z.string(),
-  quantity: z.number().int().positive(),
-  dueDate: z.coerce.date(),
+	bookId: z.string(),
+	quantity: z.number().int().positive(),
+	dueDate: z.coerce.date(),
 });
 
 export type CreateBorrowValidator = z.infer<typeof borrowZodSchema>;

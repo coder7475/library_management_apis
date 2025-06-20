@@ -3,18 +3,34 @@ import { BookQueryParams, CreateBookValidator } from "@/schemas/book.schema";
 import type { Request, Response } from "express";
 
 const getBooks = async (req: Request<{}, {}, {}, BookQueryParams>, res: Response): Promise<void> => {
-	console.log(req.query);
+	try {
+		const { filter, sortBy = "createdAt", sort = "asc", limit = 10 } = req.query;
 
-	const allBooks = await Book.find();
-	res.status(200).json({
-		success: true,
-		message: "Books retrieved successfully",
-		data: allBooks
-	});
+		const query: Partial<Pick<BookQueryParams, "filter">> = {};
+		if (filter) query.filter = filter;
+
+		const books = await Book.find(filter ? { genre: filter } : {})
+			.sort({ [sortBy]: sort === "desc" ? -1 : 1 })
+			.limit(limit);
+
+		res.status(200).json({
+			success: true,
+			message: "Books retrieved successfully",
+			data: books,
+		});
+	} catch (error) {
+		res.status(400).json({
+			success: false,
+			message: "Books retrieved failed",
+			error: (error as Error).message,
+		});
+	}
 };
 
-const createBook = async (req: Request<Record<string, never>, Record<string, never>, CreateBookValidator>, 
-							res: Response): Promise<void> => {
+const createBook = async (
+	req: Request<Record<string, never>, Record<string, never>, CreateBookValidator>,
+	res: Response,
+): Promise<void> => {
 	try {
 		// use instance method to save
 		const book = new Book(req.body);
@@ -25,16 +41,12 @@ const createBook = async (req: Request<Record<string, never>, Record<string, nev
 			message: "Book created successfully",
 			data: book,
 		});
-
-	}
-	catch (error) {
-
+	} catch (error) {
 		res.status(500).json({
 			message: "Failed to create book",
 			sucess: false,
 			error: (error as Error).message,
 		});
-
 	}
 };
 
