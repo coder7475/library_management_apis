@@ -2,29 +2,9 @@ import mongoose from "mongoose";
 import app from "./app";
 import { env } from "./configs/envConfig";
 
-const server = app.listen(env.PORT, () => {
+const server = app.listen(env.PORT, async () => {
 	console.log(`🚀 Server (${env.NODE_ENV}) running at https://${env.HOST}:${env.PORT}`);
-
-	// connect to database
-	connectToMongoDB();
 });
-
-async function connectToMongoDB() {
-	try {
-		mongoose.set("debug", true);
-		mongoose.connection.on("error", (err) => {
-			console.error("❌ Mongoose error:", err);
-		});
-
-		await mongoose.connect(env.MONGODB_URI, {
-			connectTimeoutMS: 100000,
-		});
-		console.log("✅ Connected to MongoDB");
-	} catch (error) {
-		console.error("❌ MongoDB connection error:", error);
-		process.exit(1); // Exit if DB connection fails
-	}
-}
 
 // Graceful shutdown handler
 const onCloseSignal = async () => {
