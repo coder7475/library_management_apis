@@ -8,7 +8,7 @@
 	"main": "dist/server.js",
 	"scripts": {
 		"dev": "node --import=tsx --watch src/server.ts",
-		"build": "tsc",
+		"build": "tsc -p tsconfig.build.json",
 		"start": "NODE_ENV=production node dist/server.js",
 		"lint": "biome lint --fix",
 		"format": "biome format --write"

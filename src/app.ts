@@ -3,8 +3,8 @@ import helmet from "helmet";
 import cors from "cors";
 import bookRouter from "./routes/books.route";
 import borrowRouter from "./routes/borrow.route";
-import indexRouter from "routes";
-import { middlewares } from "middlewares";
+import indexRouter from "./routes";
+import { middlewares } from "./middlewares";
 
 // Initialize the express app
 const app: Express = express();
