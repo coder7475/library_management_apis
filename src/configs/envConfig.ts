@@ -25,7 +25,7 @@ const envSchema = z.object({
 		}),
 	HOST: z.string().default("localhost"),
 	NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
-	MONGODB_URI: z.string().nonempty()
+	MONGODB_URI: z.string().nonempty(),
 });
 
 // ✅ Validate process.env

@@ -9,7 +9,7 @@
 	"scripts": {
 		"dev": "node --import=tsx --watch src/server.ts",
 		"build": "tsc && tsup src/server.ts --out-dir dist --clean",
-		"start": "node dist/server.js",
+		"start": "NODE_ENV=production node dist/server.js",
 		"lint": "biome lint --fix",
 		"format": "biome format --write"
 	},

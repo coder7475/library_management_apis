@@ -29,7 +29,7 @@ const envSchema = zod_1.z.object({
     }),
     HOST: zod_1.z.string().default("localhost"),
     NODE_ENV: zod_1.z.enum(["development", "production", "test"]).default("development"),
-    MONGODB_URI: zod_1.z.string().nonempty()
+    MONGODB_URI: zod_1.z.string().nonempty(),
 });
 // ✅ Validate process.env
 const parsedEnv = envSchema.safeParse(process.env);

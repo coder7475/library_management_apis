@@ -12,6 +12,7 @@ const routes_1 = __importDefault(require("routes"));
 const middlewares_1 = require("middlewares");
 // Initialize the express app
 const app = (0, express_1.default)();
+app.enable("trust proxy"); // trust the first proxy
 // middlewares
 app.use(express_1.default.json());
 app.use((0, cors_1.default)()); // allows to control cors policies

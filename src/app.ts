@@ -1,4 +1,4 @@
-import express, { Express } from "express";
+import express, { type Express } from "express";
 import helmet from "helmet";
 import cors from "cors";
 import bookRouter from "./routes/books.route";
@@ -9,6 +9,7 @@ import { middlewares } from "middlewares";
 // Initialize the express app
 const app: Express = express();
 
+app.enable("trust proxy"); // trust the first proxy
 // middlewares
 app.use(express.json());
 app.use(cors()); // allows to control cors policies

@@ -23,7 +23,13 @@ const server = app_1.default.listen(envConfig_1.env.PORT, () => {
 function connectToMongoDB() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield mongoose_1.default.connect(envConfig_1.env.MONGODB_URI);
+            mongoose_1.default.set("debug", true);
+            mongoose_1.default.connection.on("error", (err) => {
+                console.error("❌ Mongoose error:", err);
+            });
+            yield mongoose_1.default.connect(envConfig_1.env.MONGODB_URI, {
+                connectTimeoutMS: 100000,
+            });
             console.log("✅ Connected to MongoDB");
         }
         catch (error) {

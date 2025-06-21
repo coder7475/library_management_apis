@@ -11,7 +11,14 @@ const server = app.listen(env.PORT, () => {
 
 async function connectToMongoDB() {
 	try {
-		await mongoose.connect(env.MONGODB_URI);
+		mongoose.set("debug", true);
+		mongoose.connection.on("error", (err) => {
+			console.error("❌ Mongoose error:", err);
+		});
+
+		await mongoose.connect(env.MONGODB_URI, {
+			connectTimeoutMS: 100000,
+		});
 		console.log("✅ Connected to MongoDB");
 	} catch (error) {
 		console.error("❌ MongoDB connection error:", error);
