@@ -3,7 +3,7 @@ import { middlewares } from "@/middlewares";
 import { bookQuerySchema, bookZodSchema, updateBookSchema } from "@/schemas/book.schema";
 import { bookController } from "@/controller/book.controller";
 
-const bookRouter = Router();
+const bookRouter: Router = Router();
 
 bookRouter.post("/", middlewares.validate(bookZodSchema), bookController.createBook);
 bookRouter.get("/", middlewares.validate(bookQuerySchema), bookController.getBooks);

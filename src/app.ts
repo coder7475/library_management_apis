@@ -1,4 +1,4 @@
-import express from "express";
+import express, {Express} from "express";
 import indexRouter from "@/routes";
 import { middlewares } from "@/middlewares";
 import helmet from "helmet";
@@ -7,7 +7,7 @@ import bookRouter from "@/routes/books.route";
 import borrowRouter from "./routes/borrow.route";
 
 // Initialize the express app
-const app = express();
+const app: Express = express();
 
 // middlewares
 app.use(express.json());
