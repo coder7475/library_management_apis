@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { middlewares } from "@/middlewares";
-import { bookQuerySchema, bookZodSchema, updateBookSchema } from "@/schemas/book.schema";
-import { bookController } from "@/controller/book.controller";
+import { middlewares } from "middlewares";
+import { bookQuerySchema, bookZodSchema, updateBookSchema } from "schemas/book.schema";
+import { bookController } from "controller/book.controller";
 
 const bookRouter: Router = Router();
 

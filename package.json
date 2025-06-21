@@ -8,7 +8,7 @@
 	"main": "dist/server.js",
 	"scripts": {
 		"dev": "node --import=tsx --watch src/server.ts",
-		"build": "tsup src/server.ts --out-dir dist --clean --no-dts",
+		"build": "tsc && tsup src/server.ts --out-dir dist --clean",
 		"start": "node dist/server.js",
 		"lint": "biome lint --fix",
 		"format": "biome format --write"
@@ -31,9 +31,6 @@
 		"tsup": "^8.5.0",
 		"tsx": "^4.20.2",
 		"typescript": "^5.2.2"
-	},
-	"_moduleAliases": {
-		"@": "dist"
 	},
 	"packageManager": "pnpm@10.12.1"
 }

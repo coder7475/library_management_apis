@@ -1,5 +1,5 @@
-import { Book } from "@/models/book.model";
-import type { BookQueryParams, CreateBookValidator, UpdateBookValidator } from "@/schemas/book.schema";
+import { Book } from "models/book.model";
+import type { BookQueryParams, CreateBookValidator, UpdateBookValidator } from "schemas/book.schema";
 import type { Request, Response } from "express";
 
 const getBooks = async (req: Request<unknown, unknown, unknown, BookQueryParams>, res: Response): Promise<void> => {

@@ -1,6 +1,6 @@
-import { Book } from "@/models/book.model";
-import { Borrow } from "@/models/borrow.model";
-import type { CreateBorrowValidator } from "@/schemas/borrow.schema";
+import { Book } from "models/book.model";
+import { Borrow } from "models/borrow.model";
+import type { CreateBorrowValidator } from "schemas/borrow.schema";
 import type { Request, Response } from "express";
 
 const getAllBorrows = async (_req: Request, res: Response): Promise<void> => {

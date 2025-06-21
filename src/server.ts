@@ -1,7 +1,6 @@
-import "module-alias/register";
-import app from "@/app";
-import { env } from "@/configs/envConfig";
 import mongoose from "mongoose";
+import app from "./app";
+import { env } from "./configs/envConfig";
 
 const server = app.listen(env.PORT, () => {
 	console.log(`🚀 Server (${env.NODE_ENV}) running at https://${env.HOST}:${env.PORT}`);

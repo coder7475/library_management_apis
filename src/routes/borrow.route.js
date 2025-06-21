@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const borrow_controller_1 = require("controller/borrow.controller");
+const express_1 = require("express");
+const validate_1 = require("middlewares/validate");
+const borrow_schema_1 = require("schemas/borrow.schema");
+const borrowRouter = (0, express_1.Router)();
+borrowRouter.get("/", borrow_controller_1.borrowController.getAllBorrows);
+borrowRouter.post("/", (0, validate_1.validate)(borrow_schema_1.borrowZodSchema), borrow_controller_1.borrowController.createBorrow);
+exports.default = borrowRouter;

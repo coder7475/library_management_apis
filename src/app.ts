@@ -1,10 +1,10 @@
-import express, {Express} from "express";
-import indexRouter from "@/routes";
-import { middlewares } from "@/middlewares";
+import express, { Express } from "express";
 import helmet from "helmet";
 import cors from "cors";
-import bookRouter from "@/routes/books.route";
+import bookRouter from "./routes/books.route";
 import borrowRouter from "./routes/borrow.route";
+import indexRouter from "routes";
+import { middlewares } from "middlewares";
 
 // Initialize the express app
 const app: Express = express();
