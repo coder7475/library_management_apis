@@ -1,9 +1,9 @@
 import { Book } from "@/models/book.model";
 import { Borrow } from "@/models/borrow.model";
-import { CreateBorrowValidator } from "@/schemas/borrow.schema";
-import { Request, Response } from "express";
+import type { CreateBorrowValidator } from "@/schemas/borrow.schema";
+import type { Request, Response } from "express";
 
-const getAllBorrows = async (req: Request, res: Response): Promise<void> => {
+const getAllBorrows = async (_req: Request, res: Response): Promise<void> => {
 	try {
 		const summary = await Borrow.aggregate([
 			{
@@ -30,7 +30,7 @@ const getAllBorrows = async (req: Request, res: Response): Promise<void> => {
 						title: "$book.title",
 						isbn: "$book.isbn",
 					},
-					totalQuantity: 1
+					totalQuantity: 1,
 				},
 			},
 		]);
@@ -54,7 +54,7 @@ const createBorrow = async (
 	res: Response,
 ): Promise<void> => {
 	try {
-		const { book: bookId, quantity, dueDate } = req.body;
+		const { book: bookId, quantity } = req.body;
 
 		const book = await Book.findById(bookId);
 

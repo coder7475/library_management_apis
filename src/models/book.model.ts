@@ -1,5 +1,5 @@
 import type { BookMethods, IBook } from "@/interfaces/book.interface";
-import { Model, Schema, model } from "mongoose";
+import { type Model, Schema, model } from "mongoose";
 
 const bookSchema = new Schema<IBook, Model<IBook, unknown, BookMethods>, BookMethods>(
 	{
@@ -24,4 +24,4 @@ bookSchema.method("updateAvailability", function updateAvailability() {
 	return this.save();
 });
 
-export const Book = model<IBook, Model<IBook, {}, BookMethods>>("Book", bookSchema);
+export const Book = model<IBook, Model<IBook, unknown, BookMethods>>("Book", bookSchema);
