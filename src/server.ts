@@ -1,9 +1,10 @@
+import "module-alias/register";
 import app from "@/app";
 import { env } from "@/configs/envConfig";
 import mongoose from "mongoose";
 
 const server = app.listen(env.PORT, () => {
-	console.log(`🚀 Server (${env.NODE_ENV}) running at http://${env.HOST}:${env.PORT}`);
+	console.log(`🚀 Server (${env.NODE_ENV}) running at https://${env.HOST}:${env.PORT}`);
 
 	// connect to database
 	connectToMongoDB();

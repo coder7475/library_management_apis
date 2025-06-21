@@ -18,6 +18,7 @@
 		"dotenv": "^16.0.3",
 		"express": "^4.18.2",
 		"helmet": "^8.1.0",
+		"module-alias": "^2.2.3",
 		"mongoose": "^8.16.0",
 		"zod": "^3.25.67"
 	},
@@ -26,8 +27,12 @@
 		"@types/cors": "^2.8.19",
 		"@types/express": "^4.17.21",
 		"@types/node": "^20.4.2",
+		"tsconfig-paths": "^4.2.0",
 		"tsx": "^4.20.2",
 		"typescript": "^5.2.2"
+	},
+	"_moduleAliases": {
+		"@": "dist"
 	},
 	"packageManager": "pnpm@10.12.1"
 }
