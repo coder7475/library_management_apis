@@ -5,5 +5,5 @@ export const borrowZodSchema = z.object({
 	quantity: z.number().int().positive(),
 	dueDate: z.coerce.date(),
 });
- 
+
 export type CreateBorrowValidator = z.infer<typeof borrowZodSchema>;

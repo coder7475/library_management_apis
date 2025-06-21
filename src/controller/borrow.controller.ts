@@ -4,12 +4,49 @@ import { CreateBorrowValidator } from "@/schemas/borrow.schema";
 import { Request, Response } from "express";
 
 const getAllBorrows = async (req: Request, res: Response): Promise<void> => {
-	const borrows = await Borrow.find();
-	res.status(200).json({
-		success: true,
-		message: "Retreived all borrows successfully",
-		data: borrows,
-	});
+	try {
+		const summary = await Borrow.aggregate([
+			{
+				$group: {
+					_id: "$book", // Group by book ID
+					totalQuantity: { $sum: "$quantity" },
+				},
+			},
+			{
+				$lookup: {
+					from: "books", // Match the name of your books collection (lowercase plural)
+					localField: "_id",
+					foreignField: "_id",
+					as: "book",
+				},
+			},
+			{
+				$unwind: "$book", // Unwrap book array into object
+			},
+			{
+				$project: {
+					_id: 0,
+					book: {
+						title: "$book.title",
+						isbn: "$book.isbn",
+					},
+					totalQuantity: 1
+				},
+			},
+		]);
+
+		res.status(200).json({
+			success: true,
+			message: "Borrowed books summary retrieved successfully",
+			data: summary,
+		});
+	} catch (error) {
+		res.status(500).json({
+			message: "Failed to get books summary",
+			sucess: false,
+			error: (error as Error).message,
+		});
+	}
 };
 
 const createBorrow = async (
@@ -17,7 +54,6 @@ const createBorrow = async (
 	res: Response,
 ): Promise<void> => {
 	try {
-
 		const { book: bookId, quantity, dueDate } = req.body;
 
 		const book = await Book.findById(bookId);
@@ -29,10 +65,9 @@ const createBorrow = async (
 				sucess: false,
 				data: book,
 			});
-		}
-		else if (book.copies < quantity) {
+		} else if (book.copies < quantity) {
 			res.status(400).json({
-				message: "Not enough copie available",
+				message: "Not enough copies available",
 				sucess: false,
 				data: book,
 			});
@@ -52,7 +87,6 @@ const createBorrow = async (
 			message: "Book borrowed successfully",
 			data: borrow,
 		});
-		
 	} catch (error) {
 		res.status(500).json({
 			message: "Failed to borrow book",
@@ -64,5 +98,5 @@ const createBorrow = async (
 
 export const borrowController = {
 	getAllBorrows,
-	createBorrow
+	createBorrow,
 };

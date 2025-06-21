@@ -19,10 +19,9 @@ const bookSchema = new Schema<IBook, Model<IBook, unknown, BookMethods>, BookMet
 );
 
 // Instance method to update availability
-bookSchema.method('updateAvailability', function updateAvailability() {
+bookSchema.method("updateAvailability", function updateAvailability() {
 	this.available = this.copies > 0;
 	return this.save();
-});  
+});
 
 export const Book = model<IBook, Model<IBook, {}, BookMethods>>("Book", bookSchema);
-
