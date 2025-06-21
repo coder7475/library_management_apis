@@ -118,7 +118,7 @@ For `/api/books`:
 
 ## 📈 Data Model
 
-![Data Model](./data_model.png)
+![Data Model](./er_diagram.png)
 
 
 ---
