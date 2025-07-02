@@ -1,20 +1,30 @@
-import { Book } from "./../models/book.model";
 import type { BookQueryParams, CreateBookValidator, UpdateBookValidator } from "./../schemas/book.schema";
+import { Book } from "./../models/book.model";
 import type { Request, Response } from "express";
 
 const getBooks = async (req: Request<unknown, unknown, unknown, BookQueryParams>, res: Response): Promise<void> => {
 	try {
-		const { filter, sortBy = "createdAt", sort = "asc", limit = 10 } = req.query;
+		const { filter, sortBy = "createdAt", sort = "desc", limit = 10, page = 1 } = req.query;
 		const sortOrder = sort === "desc" ? -1 : 1;
+		const skip = (page - 1) * limit;
+		const query = filter ? { genre: filter } : {};
 
-		const books = await Book.find(filter ? { genre: filter } : {})
+		const totalCounts = await Book.countDocuments(query);
+		const totalPages = Math.ceil(totalCounts / limit);
+		const currentPage = Number(page);
+
+		const books = await Book.find(query)
 			.sort({ [sortBy]: sortOrder })
+			.skip(skip)
 			.limit(limit);
 
 		res.status(200).json({
 			success: true,
 			message: "Books retrieved successfully",
 			data: books,
+			currentPage,
+			totalPages,
+			totalCounts,
 		});
 	} catch (error) {
 		res.status(400).json({

@@ -26,6 +26,7 @@ export const bookQuerySchema = z.object({
 	sortBy: z.string().optional(),
 	sort: z.enum(["asc", "desc"]).optional(),
 	limit: z.coerce.number().optional(),
+	page: z.coerce.number().optional(),
 });
 
 export type BookQueryParams = z.infer<typeof bookQuerySchema>;
