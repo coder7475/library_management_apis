@@ -45,18 +45,18 @@ A backend system for managing a digital library, built with **Express.js**, **Ty
 
 ### 📘 Book Endpoints
 
-| Method | Endpoint             | Description                          |
-|--------|----------------------|--------------------------------------|
-| POST   | `/api/books`         | Add a new book                       |
-| GET    | `/api/books`         | List all books (with filter & sort)  |
-| GET    | `/api/books/:id`     | Get a single book by ID              |
-| PUT    | `/api/books/:id`     | Update book fields (e.g., copies)    |
-| DELETE | `/api/books/:id`     | Delete a book                        |
+| Method | Endpoint         | Description                         |
+| ------ | ---------------- | ----------------------------------- |
+| POST   | `/api/books`     | Add a new book                      |
+| GET    | `/api/books`     | List all books (with filter & sort) |
+| GET    | `/api/books/:id` | Get a single book by ID             |
+| PUT    | `/api/books/:id` | Update book fields (e.g., copies)   |
+| DELETE | `/api/books/:id` | Delete a book                       |
 
 ### 📖 Borrow Endpoints
 
 | Method | Endpoint      | Description                                                                |
-|--------|---------------|----------------------------------------------------------------------------|
+| ------ | ------------- | -------------------------------------------------------------------------- |
 | POST   | `/api/borrow` | Borrow a book (checks quantity, updates copies, handles availability flag) |
 | GET    | `/api/borrow` | Aggregated borrow summary by book (`title`, `isbn`, `totalQuantity`)       |
 
@@ -107,19 +107,19 @@ pnpm run build
 
 For `/api/books`:
 
-| Query Param | Description                       |
-|-------------|-----------------------------------|
-| `filter`    | Filter books by genre             |
-| `sortBy`    | Field to sort by (e.g., `title`)  |
-| `sort`      | Sort order: `asc` or `desc`       |
-| `limit`     | Limit number of books returned    |
+| Query Param | Description                      |
+| ----------- | -------------------------------- |
+| `filter`    | Filter books by genre            |
+| `sortBy`    | Field to sort by (e.g., `title`) |
+| `sort`      | Sort order: `asc` or `desc`      |
+| `limit`     | Limit number of books returned   |
+| `page`      | Current page for pagination      |
 
 ---
 
 ## 📈 Data Model
 
 ![Data Model](./er_diagram.png)
-
 
 ---
 
