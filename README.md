@@ -1,6 +1,13 @@
-# 📚 Library Management API – Express + TypeScript
+# 📚 Library Management API [![Version](https://img.shields.io/badge/version-v1.1.0-blue)](https://github.com/coder7475/library_management_apis/releases/tag/v1.0.1)
 
 A backend system for managing a digital library, built with **Express.js**, **TypeScript**, and **MongoDB**. It supports book cataloging, borrowing workflows, and strict data validation using Mongoose and Zod.
+
+---
+
+---
+
+> **Looking for the frontend?**
+> 👉 [https://github.com/coder7475/libraray_management_frontend](https://github.com/coder7475/libraray_management_frontend)
 
 ---
 
